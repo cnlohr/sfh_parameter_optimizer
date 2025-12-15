@@ -2246,15 +2246,15 @@ double  Calibrate( camcal_t * cc, cal_image * calimages, int nrcalimages )
 		variables[16+i*6+0] = (optimum_variable){ AdjustLocal, &ci->rotation[0], i, 0.5, 0.0, 0.2 };
 		variables[16+i*6+1] = (optimum_variable){ AdjustLocal, &ci->rotation[1], i, 0.5, 0.0, 0.2 };
 		variables[16+i*6+2] = (optimum_variable){ AdjustLocal, &ci->rotation[2], i, 0.5, 0.0, 0.2 };
-		variables[16+i*6+3] = (optimum_variable){ AdjustLocal, &ci->position[0], i, 0.5, 0.0, 0.2 };
-		variables[16+i*6+4] = (optimum_variable){ AdjustLocal, &ci->position[1], i, 0.5, 0.0, 0.2 };
-		variables[16+i*6+5] = (optimum_variable){ AdjustLocal, &ci->position[2], i, 0.5, 0.0, 0.2 };
+		variables[16+i*6+3] = (optimum_variable){ AdjustLocal, &ci->position[0], i, 0.5, ci->position[0], 0.2 };
+		variables[16+i*6+4] = (optimum_variable){ AdjustLocal, &ci->position[1], i, 0.5, ci->position[1], 0.2 };
+		variables[16+i*6+5] = (optimum_variable){ AdjustLocal, &ci->position[2], i, 0.5, ci->position[2], 0.2 };
 	}
 
-	variables[ 0] = (optimum_variable){ AdjustGlobal, &camcal.fx, 0, 0.04, 1.0, 0.001 };
-	variables[ 1] = (optimum_variable){ AdjustGlobal, &camcal.fy, 0, 0.04, 1.0, 0.001 };
-	variables[ 2] = (optimum_variable){ AdjustGlobal, &camcal.cx, 0, 0.01, 0.0, 0.001 };
-	variables[ 3] = (optimum_variable){ AdjustGlobal, &camcal.cy, 0, 0.01, 0.0, 0.001 };
+	variables[ 0] = (optimum_variable){ AdjustGlobal, &camcal.fx, 0, 0.04, camcal.fx, 0.001 };
+	variables[ 1] = (optimum_variable){ AdjustGlobal, &camcal.fy, 0, 0.04, camcal.fy, 0.001 };
+	variables[ 2] = (optimum_variable){ AdjustGlobal, &camcal.cx, 0, 0.01, camcal.cx, 0.001 };
+	variables[ 3] = (optimum_variable){ AdjustGlobal, &camcal.cy, 0, 0.01, camcal.cx, 0.001 };
 
 	variables[ 4] = (optimum_variable){ AdjustGlobal, &camcal.Kn[0], 0, 0.01, 0.0, 0.001 };
 	variables[ 5] = (optimum_variable){ AdjustGlobal, &camcal.Kn[1], 0, 0.01, 0.0, 0.001 };
