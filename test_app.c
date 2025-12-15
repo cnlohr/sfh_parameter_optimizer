@@ -2096,9 +2096,6 @@ void ComputeErrorLocal( camcal_t * cc, cal_image * image )
 
 	GenerateRotationMatrix( image->m34extrinsics, image->rotation );
 	double * ip = image->position;
-	image->m34extrinsics[m03] = ip[0];
-	image->m34extrinsics[m13] = ip[1];
-	image->m34extrinsics[m23] = ip[2];
 
 	cc->m34intrinsics[m00] = cc->fx;
 	cc->m34intrinsics[m01] = 0;
@@ -2121,7 +2118,11 @@ void ComputeErrorLocal( camcal_t * cc, cal_image * image )
 		double pOut[3];
 
 		// XXX TODO: this should be , 1. no? Otherwise center is not gathered.
-		double p[3] = { -pt->uvTarget[0], -pt->uvTarget[1], -1 };
+		double p[3] = { -pt->uvTarget[0], -pt->uvTarget[1], 0 };
+
+		p[0] += ip[0];
+		p[1] += ip[1];
+		p[2] += ip[2];
 
 		matrix34ptransform( pOut, p, image->m34extrinsics );
 		matrix34ptransform( p, pOut, cc->m34intrinsics );
