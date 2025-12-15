@@ -2173,8 +2173,8 @@ void SetCalibrationDefaults( camcal_t * cc, cal_image * calimages, int nrcalimag
 	// HMM Is this the inverse?!
 	cc->cx = 0.0;
 	cc->cy = 0.0;
-	cc->fx = 1;
-	cc->fy = 1;
+	cc->fx = 1.6;
+	cc->fy = 1.6;
 }
 
 void AdjustLocal( void * vOpaque, int iOpaque, double v )
@@ -2251,8 +2251,8 @@ double  Calibrate( camcal_t * cc, cal_image * calimages, int nrcalimages )
 		variables[16+i*6+5] = (optimum_variable){ AdjustLocal, &ci->position[2], i, 0.5, ci->position[2], 0.2 };
 	}
 
-	variables[ 0] = (optimum_variable){ AdjustGlobal, &camcal.fx, 0, 0.04, camcal.fx, 0.001 };
-	variables[ 1] = (optimum_variable){ AdjustGlobal, &camcal.fy, 0, 0.04, camcal.fy, 0.001 };
+	variables[ 0] = (optimum_variable){ AdjustGlobal, &camcal.fx, 0, 0.4, camcal.fx, 0.1 };
+	variables[ 1] = (optimum_variable){ AdjustGlobal, &camcal.fy, 0, 0.4, camcal.fy, 0.1 };
 	variables[ 2] = (optimum_variable){ AdjustGlobal, &camcal.cx, 0, 0.01, camcal.cx, 0.001 };
 	variables[ 3] = (optimum_variable){ AdjustGlobal, &camcal.cy, 0, 0.01, camcal.cx, 0.001 };
 
