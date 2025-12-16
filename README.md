@@ -46,8 +46,6 @@ int ContinueGoing( struct optimum_ctx_t * ctx )
 
 main()
 {
-	int tuningVars = 16 + 6 * nrcalimages;
-
 	optimum_variable variables[4];
 
 	variables[0] = (optimum_variable){ AdjustGlobal, &my_var_1, 0, 0.04, 1.0, 0.001 };
@@ -60,7 +58,7 @@ main()
 		.fnContinueGoing = ContinueGoing,
 		.vOpaque = 0,
 		.iOpaque = 0,
-		.nrVariables = tuningVars,
+		.nrVariables = 4,
 		.variables = variables,
 	};
 	double er = SFHGenericOptimumOptimize( &ctx );
